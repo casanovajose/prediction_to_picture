@@ -61,10 +61,26 @@ function classifyImage() {
         if (err) {
             alert("Something went wrong");
         } else {
+            console.log("results ", results);
             let resultTxt = results[0].className;
+            //
+            let sumPredictions = 0;
+            // just in case  other predictions
+            if(results[1].probability > 0.3 ) {
+                resultTxt += " "+ results[1].className
+            }
+            if(results[2].probability > 0.3 ) {
+                resultTxt += " "+ results[2].className
+            }
+
             result.innerText = resultTxt;
             let prob = 100 * results[0].probability;
             probability.innerText = Number.parseFloat(prob).toFixed(2) + "%";
+
+            html2canvas(document.querySelector("#container")).then(canvas => {
+                var a = document.body.appendChild(canvas);                
+                download(resultTxt);
+            });
         };
     });
 };
@@ -79,4 +95,12 @@ function handleFiles() {
 
 function clickUploader() {
     fileInput.click();
+};
+
+function download (filename){
+    var link = document.createElement('a');
+    var canvases = document.getElementsByTagName("canvas");
+    link.download =  filename + '.png';
+    link.href = canvases[canvases.length-1].toDataURL()
+    link.click();
 };
