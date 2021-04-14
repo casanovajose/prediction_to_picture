@@ -56,20 +56,72 @@ function gotImage(e) {
     } 
 };
 
+function createCard(imageSrc, label, probability) {
+    const container = document.getElementById("image-area")
+    const id = "card-" + Date.now()
+    const wrapper = document.createElement("div")
+    const botonDescargar = document.createElement("button")
+    const botonEliminar = document.createElement("button")
+
+    wrapper.classList.add("col-md-6")
+    wrapper.classList.add("col-lg-4")
+    wrapper.classList.add("result")
+    wrapper.id = id
+
+    botonDescargar.classList.add("btn")
+    botonDescargar.classList.add("btn-primary")
+    botonDescargar.textContent = "Descargar"
+
+    botonEliminar.classList.add("btn")
+    botonEliminar.classList.add("btn-danger")
+    botonEliminar.textContent = "Eliminar"
+    
+    wrapper.append(botonDescargar)
+    wrapper.append(botonEliminar)
+    container.append(wrapper)
+
+    botonEliminar.addEventListener("click", function() {
+        container.removeChild(wrapper)
+    })
+
+    const card = new p5(cardSketch({
+        imageSrc,
+        label,
+        probability,
+        downloadBtn: botonDescargar,
+    }), id)
+
+    
+}
+
 function classifyImage() {
     classifier.predict(image, (err, results) => {
         if (err) {
             alert("Something went wrong");
         } else {
+            console.log(image)
             console.log("results ", results);
+
+            results.forEach((result, index) => {
+                if(result.probability > 0.2 || index === 0) {
+                    const prob = 100 * result.probability;
+                    const probabilityText = Number.parseFloat(prob).toFixed(2) + "%"
+                    createCard(image.src, result.className, probabilityText)    
+                }
+            })
+
+
+            // const downloadButton = document.querySelector('#download')
+            // downloadButton.addEventListener('click', card1.downloadCard)
+
             let resultTxt = results[0].className;
             //
             let sumPredictions = 0;
             // just in case  other predictions
-            if(results[1].probability > 0.3 ) {
+            if(results[1].probability > 0.2) {
                 resultTxt += " "+ results[1].className
             }
-            if(results[2].probability > 0.3 ) {
+            if(results[2].probability > 0.2) {
                 resultTxt += " "+ results[2].className
             }
 
@@ -77,10 +129,10 @@ function classifyImage() {
             let prob = 100 * results[0].probability;
             probability.innerText = Number.parseFloat(prob).toFixed(2) + "%";
 
-            html2canvas(document.querySelector("#container")).then(canvas => {
-                var a = document.body.appendChild(canvas);                
-                download(resultTxt);
-            });
+            // html2canvas(document.querySelector("#container")).then(canvas => {
+            //     var a = document.body.appendChild(canvas);                
+            //     download(resultTxt);
+            // });
         };
     });
 };

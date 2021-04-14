@@ -4,104 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            margin-top: 3%;
-        }
-        #image {
-            max-height: 300px;
-            max-width: 90%;
-        }
-        #container {
-            background: #c79ef812;
-            height: 500px;
-            padding: 50px;
-            font-size: 14px;
-            border-radius: 33px;
-            margin: 0 auto;
-            width: 40%;
-            z-index: 1000;
-        }
-        #text-container {
-            height: 100px;
-            width: 100%;
-            text-align: center;
-        }
-        #fileUploader {
-            opacity: 0;
-        }
-        #uploader-btn {
-            background: #faebd700;
-            margin-top: 1em;
-            color: #0bcf81;
-            border: solid 1px #0bcf81;
-            padding: .6em 2em;
-            line-height: 2;
-            font-size: 12px;
-            cursor: pointer;
-            border-radius: 10px;
-        }
-        #uploader-btn:hover {
-            color: white;
-            background-color: #0bcf82;
-            border: solid 1px #0bcf82;
-            -webkit-transition: all 0.3s ease;
-            -moz-transition: all 0.3s ease;
-            -o-transition: all 0.3s ease;
-            transition: all 0.3s ease;
-        }
-        .center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .highlight {
-            opacity: 0.4;
-            background-color: rgba(161,89,252, 0.2) !important;
-        }
-        .result-color {
-            color: #A159FC;
-        }
-        .green-color {
-            color: #0bcf82;
-            font-size: 17px;
-        }
-
-        canvas {
-            display: none;
-        }
-    </style>
+    <title>Clasificación de imágenes con ML5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="container">
-        <img src="images/penguin.jpg" id="image" class="center">
-        <div id="text-container">
-            <p id="instruction" class="green-color">
-                <!-- Looks good for UI access input using this button -->
-                <button id="uploader-btn" onClick="clickUploader()">Upload Image</button>
-                <p class="green-color "> or drag and drop 📂</p>
-            </p>
-            <p id="warning" class="result-color"></p>
-            <p class="result-color">
-                The MobileNet model labeled this ⤴ as a
-                <b><span id="result" class="green-color">...</span></b>
-                <span id="probability-container" class="result-color">
-                    with a confidence of
-                    <b><span id="probability" class="green-color">...</span></b>.
-                </span>
-            </p>
-            <!-- hidden doesn't look nice for UI -->
-            <input name="imgFile" type="file" id="fileUploader" accept="image/*" onChange="handleFiles()">
+        <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <h1 class="h4">Clasificación de imágenes con ML5</h1>
+                <div class="ui">
+                    <div id="image-wrapper">
+                        <img src="images/penguin.jpg" id="image" class="img-fluid">
+                    </div>
+                    <div id="text-container">
+                        <p>Arrastrá una imagen 📂 <button id="uploader-btn" onClick="clickUploader()">o subila</button></p>
+                        <p id="warning" class="result-color"></p>
+                        <p class="result-color">
+                            The MobileNet model labeled this ⤴ as a
+                            <b><span id="result" class="green-color">...</span></b>
+                            <span id="probability-container" class="result-color">
+                                with a confidence of
+                                <b><span id="probability" class="green-color">...</span></b>.
+                            </span>
+                        </p>
+                        <!-- hidden doesn't look nice for UI -->
+                        <input name="imgFile" type="file" id="fileUploader" accept="image/*" onChange="handleFiles()">
+                      </div>
+                  </div>
+                <div id="image-area" class="row">
+                </div>
+                <!-- <button class="btn btn-primary" id="download">Descargar</button> -->
+              </div>
+            </div>
+          </div>
+          
+          
+          
+          
+          
         </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
     <script src="https://unpkg.com/ml5@0.1.3/dist/ml5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
-    <script src="sketch.js"></script>
     <script src="html2canvas.min.js"></script>
+    <script src="card.js"></script>
+    <script src="sketch.js"></script>
 </body>
 </html>

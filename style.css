@@ -1,0 +1,100 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+#container {
+  min-height: 100vh;
+}
+.h4 {
+  margin: 2em 0 0.75em;
+}
+
+#image-wrapper {
+  width: 100px;
+  height: 100px;
+  background-color: #eaeaea;
+}
+
+#image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.ui {
+  background: #fefefe;
+  font-size: 14px;
+  z-index: 1000;
+  display: flex;
+  padding: 16px;
+  border: 1px solid #eee;
+  margin-bottom: 32px;
+}
+
+.result {
+  position: relative;
+}
+
+.result button {
+  position: absolute;
+  width: 200px;
+  max-width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  opacity: 0;
+}
+
+.result button:nth-child(2) {
+  transform: translateX(-50%) translateY(10%);
+}
+
+.result:hover button {
+  opacity: 1;
+}
+
+#text-container {
+  /* height: 100px; */
+  width: 100%;
+  padding-left: 32px;
+}
+#fileUploader {
+  opacity: 0;
+}
+#uploader-btn {
+  background: transparent;
+  margin: 0;
+  border: none;
+  padding: 0;
+  line-height: 2;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  text-decoration: underline;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.highlight {
+  opacity: 0.4;
+  background-color: rgba(161,89,252, 0.2) !important;
+}
+
+
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+  margin-bottom: 16px;
+} 
+
+p {
+  margin-bottom: 0.5em;
+}
+
+p:empty {
+  margin: 0;
+}
